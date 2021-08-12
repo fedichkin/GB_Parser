@@ -169,4 +169,4 @@ result_data = pd.DataFrame(superjob_vacancies + hh_vacancies)
 
 print(result_data)
 
-result_data.to_csv("vacancies.csv")
+result_data.to_csv("vacancies.csv", index=False)
