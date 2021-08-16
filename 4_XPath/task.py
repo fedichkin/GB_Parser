@@ -47,7 +47,35 @@ def parse_mail():
     return data
 
 
-result_data = pd.DataFrame(parse_mail())
+def parse_lenta():
+    data = []
+    lenta_url = "https://lenta.ru/"
+
+    response = requests.get(lenta_url, headers=header)
+    root = html.fromstring(response.text)
+
+    items = root.xpath("//*[@id='root']/section[2]/div/div/div[1]/section[1]/div[1]/div[1]")
+    items = items + root.xpath("//*[@id='root']/section[2]/div/div/div[1]/section[1]/div[2]/div[contains(@class, 'item')]")
+
+    for item in items:
+        title = item.xpath(".//h2/a/text()")
+        href = item.xpath(".//a/@href")
+        date = item.xpath(".//time/@title")
+
+        if len(title) == 0:
+            title = item.xpath(".//a/text()")
+
+        data.append({
+            "source": "lenta.ru",
+            "title_news": re.sub(r"\s", " ", title[0].strip()) if len(title) > 0 else "",
+            "url_news": href[0].strip() if len(href) > 0 else "",
+            "date": date[0].strip() if len(date) > 0 else ""
+        })
+
+    return data
+
+
+result_data = pd.DataFrame(parse_mail() + parse_lenta())
 
 print(result_data)
 
