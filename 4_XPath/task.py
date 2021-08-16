@@ -75,7 +75,33 @@ def parse_lenta():
     return data
 
 
-result_data = pd.DataFrame(parse_mail() + parse_lenta())
+def parse_yandex():
+    data = []
+    url_yandex = "https://yandex.ru/"
+
+    response = requests.get(url_yandex, headers=header)
+    root = html.fromstring(response.text)
+
+    items = root.xpath("//ol[contains(@class, 'news__list')]/li")
+
+    for item in items:
+        title = item.xpath(".//a/span/span/text()")
+        href = item.xpath(".//a/@href")
+
+        if len(title) == 0:
+            title = item.xpath(".//a/text()")
+
+        data.append({
+            "source": "yandex.ru",
+            "title_news": re.sub(r"\s", " ", title[0].strip()) if len(title) > 0 else "",
+            "url_news": href[0].strip() if len(href) > 0 else "",
+            "date": ""
+        })
+
+    return data
+
+
+result_data = pd.DataFrame(parse_mail() + parse_lenta() + parse_yandex())
 
 print(result_data)
 
