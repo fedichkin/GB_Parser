@@ -9,4 +9,7 @@ import scrapy
 class Lesson5Item(scrapy.Item):
     _id = scrapy.Field()
     name = scrapy.Field()
-    salary = scrapy.Field()
+    min_salary = scrapy.Field()
+    max_salary = scrapy.Field()
+    url = scrapy.Field()
+    source = scrapy.Field()

@@ -22,6 +22,10 @@ ROBOTSTXT_OBEY = False
 LOG_ENABLED = True
 LOG_LEVEL = 'DEBUG'
 
+ITEM_PIPELINES = {
+   'lesson5.pipelines.Lesson5Pipeline': 300,
+}
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
