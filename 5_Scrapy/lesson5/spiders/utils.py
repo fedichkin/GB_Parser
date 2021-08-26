@@ -2,12 +2,12 @@ import re
 
 
 def get_info_salary(text_salary):
-    min_template = r"от\s(\d+\s\d+)\s(.+)$"
-    max_template = r"до\s(\d+\s\d+)\s(.+)$"
-    all_template = r"(\d+\s\d+)\s[—,–]\s(\d+\s\d+)\s(.+)$"
+    min_template = r"от\s+(\d+\s\d+)\s(.+)$"
+    max_template = r"до\s+(\d+\s\d+)\s(.+)$"
+    all_template = r"(\d+\s\d+)\s+[—,–]\s+(\d+\s\d+)\s(.+)$"
 
     result = re.search(min_template, text_salary)
-
+# 'от   80 000 руб.'
     if result:
         min_salary_text = result.group(1)
         min_salary_text = re.sub(r"\s", "", min_salary_text)

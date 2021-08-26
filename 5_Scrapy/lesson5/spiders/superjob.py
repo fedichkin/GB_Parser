@@ -25,13 +25,14 @@ class superjobSpider(scrapy.Spider):
 
         name = response.css('.f-test-vacancy-base-info h1::text').extract_first()
         salary = response.xpath(
-            "//div[contains(@class, 'f-test-vacancy-base-info')]/div[2]/div/div/div/span/span[1]/span/text()"
-        ).extract_first()
+            "//div[contains(@class, 'f-test-vacancy-base-info')]/div[2]/div/div/div/span/span[1]/span//text()"
+        ).extract()
+        salary = ' '.join([str(element) for element in salary])
         salary = get_info_salary(salary)
         min_salary = salary["min"]
         max_salary = salary["max"]
         url = response.url
-        source = "hh.ru"
+        source = "superjob.ru"
 
         item["name"] = name
         item["url"] = url
