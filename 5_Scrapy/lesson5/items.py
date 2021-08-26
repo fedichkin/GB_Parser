@@ -13,3 +13,11 @@ class Lesson5Item(scrapy.Item):
     max_salary = scrapy.Field()
     url = scrapy.Field()
     source = scrapy.Field()
+
+
+class ToolsItem(scrapy.Item):
+    _id = scrapy.Field()
+    name = scrapy.Field()
+    price = scrapy.Field()
+    article = scrapy.Field()
+    photos = scrapy.Field()

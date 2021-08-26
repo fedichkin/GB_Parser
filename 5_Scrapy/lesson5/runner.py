@@ -4,6 +4,7 @@ from scrapy.settings import Settings
 from lesson5 import settings
 from lesson5.spiders.hhru import HhruSpider
 from lesson5.spiders.superjob import superjobSpider
+from lesson5.spiders.leroymerlin import leroymerlinSpider
 
 
 if __name__ == '__main__':
@@ -12,4 +13,5 @@ if __name__ == '__main__':
     process = CrawlerProcess(settings=crawler_settings)
     process.crawl(HhruSpider)
     process.crawl(superjobSpider)
+    process.crawl(leroymerlinSpider)
     process.start()
