@@ -17,7 +17,7 @@ class Lesson5Pipeline(object):
 
 class PhotosPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
-        if item['photos']:
+        if 'photos' in item and item['photos']:
             for img in item['photos']:
                 try:
                     yield scrapy.Request(f'{img}')

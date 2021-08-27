@@ -4,6 +4,7 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy.loader.processors import TakeFirst
 
 
 class Lesson5Item(scrapy.Item):
@@ -17,7 +18,7 @@ class Lesson5Item(scrapy.Item):
 
 class ToolsItem(scrapy.Item):
     _id = scrapy.Field()
-    name = scrapy.Field()
-    price = scrapy.Field()
-    article = scrapy.Field()
+    name = scrapy.Field(output_processor=TakeFirst())
+    price = scrapy.Field(output_processor=TakeFirst())
+    article = scrapy.Field(output_processor=TakeFirst())
     photos = scrapy.Field()
